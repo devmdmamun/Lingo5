@@ -1,0 +1,11 @@
+{
+  "solutions": [
+    { "word": "share", "id": 1 },
+    { "word": "react", "id": 2 },
+    { "word": "spell", "id": 3 },
+    { "word": "space", "id": 4 },
+    { "word": "brave", "id": 5 },
+    { "word": "about", "id": 6 },
+    { "word": "price", "id": 7 }
+  ]
+}
