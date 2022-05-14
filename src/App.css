@@ -4,4 +4,8 @@
 h1 {
   font-size: 28px;
   letter-spacing: 0.7px;
+  margin-top: 10px;
+  color: #0a89de;
+  text-decoration: underline white;
+  text-underline-position: under;
 }
