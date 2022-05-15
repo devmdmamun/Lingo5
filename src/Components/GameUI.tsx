@@ -18,8 +18,7 @@ export const GameUI = (props: { solution: string }) => {
 
   return (
     <div>
-      <h1>WORDLE-GAME</h1>
-      <div> Your guess - {currentGuess}</div>
+      <h1>LINGO - 5</h1>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>
   );

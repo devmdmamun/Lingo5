@@ -14,7 +14,7 @@ const useWordle = (solution: string) => {
     let formattedGuess: { key: string | null; color: string }[] = [
       ...currentGuess,
     ].map((l) => {
-      return { key: l, color: "grey" };
+      return { key: l, color: "gray" };
     });
 
     // find any green letter.
