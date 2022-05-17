@@ -1,4 +1,3 @@
-import "./App.css";
 import { GameUI } from "./Components/GameUI";
 import { useEffect, useState } from "react";
 

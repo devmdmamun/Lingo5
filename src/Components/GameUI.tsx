@@ -18,7 +18,7 @@ export const GameUI = (props: { solution: string }) => {
 
   return (
     <div>
-      <h1>LINGO - 5</h1>
+      <h1>Lingo5</h1>
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>
   );

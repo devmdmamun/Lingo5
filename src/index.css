@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +13,20 @@ body {
   background-color: #282c34;
   color: white;
 }
-h1 {
-  margin-bottom: 20px;
+.App {
+  text-align: center;
 }
+
+h1 {
+  color: #0a89de;
+  font-size: 30px;
+  font-family: "Montserrat";
+  padding: 15px 0;
+  border-bottom: 0.5px solid #bbb;
+  margin-bottom: 30px;
+  letter-spacing: 1.6px;
+}
+
 .row {
   text-align: center;
   display: flex;
@@ -36,14 +48,75 @@ h1 {
 }
 
 .row > div.green {
-  background: #5ac85a;
-  border-color: #5ac85a;
+  --background: #5ac85a;
+  --border-color: #5ac85a;
+  animation: flip 0.5s ease forwards;
 }
 .row > div.yellow {
-  background: #e2cc68;
-  border-color: #e2cc68;
+  --background: #e2cc68;
+  --border-color: #e2cc68;
+  animation: flip 0.5s ease forwards;
 }
 .row > div.gray {
-  background: #a1a1a1;
-  border-color: #a1a1a1;
+  --background: #a1a1a1;
+  --border-color: #a1a1a1;
+  animation: flip 0.5s ease forwards;
+}
+
+.row > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.row > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.row > div:nth-child(4) {
+  animation-delay: 0.6s;
+}
+.row > div:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.row.current > div.filled {
+  animation: bounce 0.2s ease-in-out forwards;
+}
+
+/* animation */
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    background: white;
+    border: #333;
+  }
+  45% {
+    transform: rotateX(90deg);
+    background: white;
+    border: #333;
+  }
+  55% {
+    transform: rotateX(90deg);
+    background: var(--background);
+    border: var(--border-color);
+    color: white;
+  }
+  100% {
+    transform: rotateX(0);
+    background: var(--background);
+    border: var(--border-color);
+    color: white;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+    border-color: #ddd;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    border-color: #0a89de;
+  }
 }
