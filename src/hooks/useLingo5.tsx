@@ -1,17 +1,19 @@
 import { useState } from "react";
 
-const useWordle = (solution: string) => {
+const useLingo5 = (solution: string) => {
   const [turn, setTurn] = useState<number>(0);
   const [currentGuess, setCurrentGuess] = useState<string>("");
-  const [guesses, setGuesses] = useState<object[][]>([...Array(6)]); // each guess is an array
+  const [guesses, setGuesses] = useState<object[][]>([...Array(5)]); // each guess is an array
   const [history, setHistory] = useState<string[]>([]); // each guess is a string
   const [isCorrect, setIsCorrect] = useState<boolean>(false);
+  const [usedKeys, setUsedKeys] = useState<{ [key: string]: string }>({});
 
   // format a guess into an array of letter objects
   // e.g. [{key: "a", color: "yellow"}]
+
   const formatGuess = () => {
-    let solutionArray: (string | null)[] = [...solution];
-    let formattedGuess: { key: string | null; color: string }[] = [
+    let solutionArray: string[] = [...solution];
+    let formattedGuess: { key: string; color: string }[] = [
       ...currentGuess,
     ].map((l) => {
       return { key: l, color: "gray" };
@@ -21,7 +23,7 @@ const useWordle = (solution: string) => {
     formattedGuess.forEach((l, i) => {
       if (solutionArray[i] === l.key) {
         formattedGuess[i].color = "green";
-        solutionArray[i] = null;
+        solutionArray[i] = "";
       }
     });
 
@@ -29,7 +31,7 @@ const useWordle = (solution: string) => {
     formattedGuess.forEach((l, i) => {
       if (solutionArray.includes(l.key) && l.color !== "green") {
         formattedGuess[i].color = "yellow";
-        solutionArray[solutionArray.indexOf(l.key)] = null;
+        solutionArray[solutionArray.indexOf(l.key)] = "";
       }
     });
 
@@ -39,7 +41,7 @@ const useWordle = (solution: string) => {
   // add a new guess to the guesses state
   // update the incorrect state if the guess is correct
   // add one to the turn state
-  const addNewGuess = (formattedGuess: object[]) => {
+  const addNewGuess = (formattedGuess: { key: string; color: string }[]) => {
     if (currentGuess === solution) {
       setIsCorrect(true);
     }
@@ -54,6 +56,28 @@ const useWordle = (solution: string) => {
     setTurn((prev) => {
       return prev + 1;
     });
+
+    setUsedKeys((prevUsedKeys) => {
+      formattedGuess.forEach((l) => {
+        const currentColor = prevUsedKeys[l.key];
+
+        if (l.color === "green") {
+          prevUsedKeys[l.key] = "green";
+          return;
+        }
+        if (l.color === "yellow" && currentColor !== "green") {
+          prevUsedKeys[l.key] = "yellow";
+          return;
+        }
+        if (l.color === "grey" && currentColor !== ("green" || "yellow")) {
+          prevUsedKeys[l.key] = "grey";
+          return;
+        }
+      });
+
+      return prevUsedKeys;
+    });
+
     setCurrentGuess("");
   };
 
@@ -64,16 +88,13 @@ const useWordle = (solution: string) => {
       // only add guess if turn is less then five
       // if not submitted before (duplicate)
       // word must be five chars long
-      if (turn > 5) {
-        console.log("You don't have any guess left");
+      if (turn > 4) {
         return;
       }
       if (history.includes(currentGuess)) {
-        console.log("You already tried this word");
         return;
       }
       if (currentGuess.length < 5) {
-        console.log("words must be 5 chars long");
         return;
       }
       const formatted = formatGuess();
@@ -94,7 +115,7 @@ const useWordle = (solution: string) => {
     }
   };
 
-  return { turn, currentGuess, guesses, isCorrect, handleKeyup };
+  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup };
 };
 
-export default useWordle;
+export default useLingo5;
