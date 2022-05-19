@@ -16,7 +16,7 @@ const useLingo5 = (solution: string) => {
     let formattedGuess: { key: string; color: string }[] = [
       ...currentGuess,
     ].map((l) => {
-      return { key: l, color: "gray" };
+      return { key: l, color: "grey" };
     });
 
     // find any green letter.
