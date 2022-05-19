@@ -2,7 +2,7 @@ import { GameUI } from "./Components/GameUI";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [solution, setSolution] = useState(null);
+  const [solution, setSolution] = useState<string>("");
 
   useEffect(() => {
     // Use your own Api end-point here.
@@ -11,7 +11,7 @@ function App() {
       .then((json) => {
         // random int between 0 & 6
         const randomSolution = json[Math.floor(Math.random() * json.length)];
-        setSolution(randomSolution.word);
+        setSolution(randomSolution.word.toUpperCase());
       });
   }, [setSolution]);
 
